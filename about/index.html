@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red{background: red}
+        .green{background: green}
+        .orange{background: orange}
+
+        .circle{
+            border-radius: 100%;
+            border: 1px solid cadetblue;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+<!--    <h3>Counter: {{counter}}</h3>-->
+<!--    <button v-on:click="PlusAndMinus('plus', $event)" v-on:mouseleave="onMouseOut">Plus</button>-->
+<!--    <button @click="PlusAndMinus('minus', $event)" v-on:mouseleave="onMouseOut">Minus</button>-->
+<!--    <a href="http://google.com" v-on:click.prevent target="_blank">Google</a>-->
+<!--    <h1>{{name}}</h1>-->
+<!--    <input type="text" v-on:keyup.enter.space="changeName" >-->
+<!--    <h2 >{{name}}</h2>-->
+<!--    <input type="text" v-model.lazy="name">-->
+    <div
+            class="circle"
+            :style="{'width': width+'px', 'height': height+'px', 'backgroundColor': color}"
+            @click="isActive = !isActive"
+            :class="getClassCss()"
+    ></div>
+    <input type="range" min="0" max="250" value="0" @input="resizeCount">
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+           counter: 0,
+            name: 'Hello Vue',
+            isActive: false,
+            color: 'rgb(1,152,1)',
+            width: 100,
+            height: 100,
+        },
+        methods: {
+            resizeCount: function(event){
+                this.width = event.target.value;
+                this.height = event.target.value;
+                this.color = "rgb(3,this.width, this.height)";
+            },
+            PlusAndMinus: function (params, event){
+                if(params === 'plus')
+                    this.counter++;
+                else if(params === 'minus')
+                    this.counter--;
+
+                event.target.style.backgroundColor = 'orange';
+            },
+            onMouseOut: function (event){
+                event.target.style.backgroundColor = 'rgb(239, 239, 239)';
+            },
+            changeName: function(event){
+                this.name = event.target.value;
+            },
+            getClassCss: function (){
+                return {
+                    'red': !this.isActive,
+                    'green': this.isActive,
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
