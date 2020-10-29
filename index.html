@@ -8,10 +8,51 @@
     <title>Document</title>
 </head>
 <body>
+<div id="app">
+<!--    <h1>{{message}}</h1>-->
+<!--    <p>{{ array.join(' : ') }}</p>-->
+<!--    <strong>{{getMessage()}}</strong>-->
+<!--    <em>{{20+65}}</em>-->
+<!--    <input type="text" v-on:input="changeName">-->
+<!--    <br>-->
+<!--    <a v-bind:href="url">Google</a>-->
+<!--    <input type="text" v-on:keyup.enter="setUrl($event)">-->
+    <p v-bind:title="message">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, at cum deserunt inventore ipsam natus perspiciatis quis repudiandae rerum tempora.
+    </p>
+    <h4 v-html="link">
+    </h4>
+
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello I am VueJs '+new Date().toLocaleString(),
+            array: ['React', 'Vue', 'Angular', 'Node'],
+            url: 'https://google.com',
+            link: '<a href="http://google.com">Google</a>'
+        },
+        methods: {
+            changeName: function(event){
+                this.message = event.target.value;
+                if(event.target.value.length > 5 && event.target.value.length <= 9)
+                    event.target.style.color = 'red';
+                else if(event.target.value.length >= 10)
+                    event.target.style.color = 'cyan';
+            },
 
+            getMessage: function (){
+                return 'Hello i am Vue';
+            },
+
+            setUrl: function (event){
+                this.url = event.target.value;
+            }
+        }
+    });
 </script>
 </body>
 </html>
